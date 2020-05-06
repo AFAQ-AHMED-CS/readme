@@ -1,16 +1,15 @@
- # Documentation of JSON & AJAX AND ANGULAR  
-## JSON & AJAX CRUD
+ ## JSON & AJAX
 
 
-## Table of content
+### Table of content
 -    Definition
 -    Create 
 -    Update
 -    Edit
 -    Delete
-### Defintion:
-JavaScript Object Notation is an open standard file format, and data interchange  format, that  uses human-readable text to store and transmit data objects consisting of attribute–value pairsand array data types.
-#code:
+
+
+##code:
   $(document).ready(function () {
 		$("#addbtn").click(function (){
 
@@ -24,38 +23,35 @@ JavaScript Object Notation is an open standard file format, and data interchange
 		var jsonObj = { ID: id , Name: name , Age: age , Height: height , CNIC: cnic};
 		console.log(jsonObj);
 
-### Create Operation:
+#### Create Operation:
 First create the website front hand profile and its instruments like table, form, buttons and complete font hand.  
-#code:
- <div class="container">
-        <h2>
-            Add Person<h2>
+##ode
 
-                <form>
+                <form class="F-c"> 
 
                     <div class="form-group row">
-                        <lable class="col-sm-2 col-form-lable">Id</lable>
+                        <lable class="col-sm-2 col-form-lable">ID</lable>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="id" placeholder="Id">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <lable class="col-sm-2 col-form-lable">Name</lable>
+                        <lable class="col-sm-2 col-form-lable">NAME</lable>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="name" placeholder="Name">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <lable class="col-sm-2 col-form-lable">Age</lable>
+                        <lable class="col-sm-2 col-form-lable">AGE</lable>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="age" placeholder="Age">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <lable class="col-sm-2 col-form-lable">Height</lable>
+                        <lable class="col-sm-2 col-form-lable">HEIGHT</lable>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="height" placeholder="Height">
                         </div>
@@ -81,13 +77,12 @@ First create the website front hand profile and its instruments like table, form
 
 
 
-
-### Update:
+#### Update:
 When you have to be done fronthand section then you appling CURD operation on the website properly.If you add data in 
 your website and you want to update person's data you just open your web page and update as you want. You can see below the 
 updating.
 
-#code:
+##code:
 $("#updateButton").click(function (){
 		
 		var id = $("#eid").val();
@@ -100,9 +95,9 @@ $("#updateButton").click(function (){
 
 
 
-### Edit:
+#### Edit:
 If you want to add data on your website any person you just insert the data on the field. You just see the below how to add / edit the data.
-#code:
+##code:
            $.ajax({
                     type: "GET",
                     url: editUrl,
@@ -126,9 +121,9 @@ If you want to add data on your website any person you just insert the data on t
 
 
 
-### Delete:
+#### Delete:
 If someone leave you company and you want to  delete the data of that person just open the profile of person and delete the data.
-#code:
+##code:
             $.ajax({
                     type: "DELETE",
                     url: delUrl,
@@ -148,8 +143,8 @@ If someone leave you company and you want to  delete the data of that person jus
 
 
 
-# ANGULAR CRUD
-## Table of Content
+## ANGULAR
+### Table of Content
 -    Definition
 -    Controller
 -    Create
@@ -157,12 +152,8 @@ If someone leave you company and you want to  delete the data of that person jus
 -    Edit
 -    Delete
 
-### Definition:
-AngularJS is a structural framework for dynamic web applications. It lets you use HTML as your template language and lets you 
-extend HTML's syntax to express your application components clearly and succinctly. Its data binding and dependency injection 
-eliminate much of the code you currently have to write.
 
-#code:
+##code:
  <table class="table table-hover">
             <thead>
                 <tr>
@@ -189,10 +180,10 @@ eliminate much of the code you currently have to write.
 
 
 
-### Controller:
+#### Controller:
 A controller is defined using ng-controller directive. A controller is a JavaScript object that contains attributes/properties, and functions. ... The property fullName is the function of $scope.
 
-#code:
+##code:
 var myapp = angular.module("myApp", []);
 	myapp.controller('myController', function($scope, $http) {
     URL = "https://fawadlab.herokuapp.com/person/";
@@ -204,11 +195,9 @@ var myapp = angular.module("myApp", []);
 
         });
 
-### Create:
+#### Create:
 Angular is quit easy to SJON. First create the website front hand profile and its instruments like table, form, buttons and complete font hand.Here you can see my website fronthand complete code.
-#code:
-<body>
-    <div class="container" ng-app="myApp" ng-controller="myController">
+##code:
        
         <form>
             <h1>Person Data</h1>
@@ -304,39 +293,10 @@ Angular is quit easy to SJON. First create the website front hand profile and it
 </body>
 </html>
 
-### Update:
-If you want to update any person data just open its form and update it.
-
-#code:
-$scope.saveChanges = function () {
-        url =  "https://fawadlab.herokuapp.com/person/" + person.ID;
-        var obj = { "Name": $scope.User_name, "CNIC": $scope.User_cnic, "Age": $scope.User_age, "Height": $scope.User_height };
-        console.log(obj);
-
-        //$http PUT function
-        $http.put(url, obj).then(function successCallback(response) {
-
-            
-            Swal.fire(
-                'Good job!',
-                'Record Updated Successfully!',
-                'success'
-            )
-
-        }, function errorCallback(response) {
-
-            alert("Error. while updating user Try Again!");
-
-        });
-
-    };
-
-
-
-### Edit:
+#### Edit:
 When a person comes to your company and join it then you want to enter that person record open website and insert the data
 on it.
-#code:
+##code:
 $scope.editPerson = function (id)
     {
         console.log(id);
@@ -357,10 +317,10 @@ $scope.editPerson = function (id)
 
 
 
-### Delete:
+#### Delete:
 If any enployee want to leave the company and company owner want to delete the record of the enployee just see the below how to
 delete record.
-#code:
+##code:
  $scope.deleteData = function (user) {
 
         //$http DELETE function
