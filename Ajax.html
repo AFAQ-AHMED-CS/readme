@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="bootstrap.css" rel="stylesheet" />
+	<link href="Mycss.css" rel="stylesheet"/>
+    <script src="jquery-3.4.1.js"></script>
+</head>
+<body>
+    <div class="container b M">
+        <h2>
+            ADD PERSON<h2>
+
+                <form class="F-c"> 
+
+                    <div class="form-group row">
+                        <lable class="col-sm-2 col-form-lable">ID</lable>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="id" placeholder="Id">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <lable class="col-sm-2 col-form-lable">NAME</lable>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" placeholder="Name">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <lable class="col-sm-2 col-form-lable">AGE</lable>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="age" placeholder="Age">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <lable class="col-sm-2 col-form-lable">HEIGHT</lable>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="height" placeholder="Height">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <lable class="col-sm-2 col-form-lable">CNIC</lable>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="cnic" placeholder="CNIC">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-primary" id="addbtn">Add Person</button>
+                        </div>
+                    </div>
+
+                </form>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Height</th>
+                            <th>Cnic</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="stdbody">
+                    </tbody>
+                </table>
+
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Person</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Id</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="eid" placeholder="Id">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="ename" placeholder="Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Age</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" id="eage" placeholder="Age">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Height</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="eheight" placeholder="Height">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Cnic</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="ecnic" placeholder="CNIC">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" id="updateButton" class="btn btn-primary">Update changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+		$("#addbtn").click(function (){
+
+		var id = $("#id").val();
+		var name = $("#name").val();
+		var age = $("#age").val();
+		var height = $("#height").val();
+		var cnic = $("#cnic").val();
+
+
+		var jsonObj = { ID: id , Name: name , Age: age , Height: height , CNIC: cnic};
+		console.log(jsonObj);
+
+		$.ajax({
+			type: "POST",
+            url: "http://labapi.somee.com/api/Person",
+			data: jsonObj,
+
+			success: function(result){
+			$("#stdbody").append("<tr><td>" + id + "</td><td>" + name + "</td><td>" + age + "</td><td>" + height + "</td><td>" + cnic + "</td></tr>")
+			alert("Success");
+			},
+
+			failure: function(result){
+			alert("Failure");
+			},
+
+			error: function(result){
+			alert("Error");
+			},
+
+		});
+
+		});
+		 $("#updateButton").click(function () {
+                var id = $("#eid").val();
+                var name = $("#ename").val();
+                var age = $("#eage").val();
+                var height = $("#eheight").val();
+                var cnic = $("#ecnic").val();
+                var jsonObj = { ID: id, Name: name, Age: age, Height: height, CNIC: cnic };
+                var Url = "http://labapi.somee.com/api/Person/" + id;
+
+                $.ajax({
+                    type: "PUT",
+                    url: Url,
+                    data: JSON.stringify(jsonObj),
+                    contentType: "application/json;charset=utf-8",
+                    success: function (res) {
+                        $("#stdbody").html("");
+						for (r in res){
+						  $("#stdbody").append("<tr><td>" + res[r].ID + "</td><td>" + res[r].Name + "</td><td>" + res[r].Age + "</td><td>" + res[r].Height + "</td><td>" + res[r].CNIC + "</td><td><button type='button' class='btn btn-info' data-toggle='modal' data-target='#exampleModal' onclick=editPerson('" + res[r].ID + "')>Edit</button> | <button type='button' class='btn btn-danger' onclick=deletePerson('" + res[r].ID + "')>Delete</button></td></tr>")
+
+						}
+                    },
+                    failure: function (result) {
+                        alert("Failure");
+                    },
+                    error: function (result) {
+                        alert("Error");
+                    },
+                });
+            });
+
+
+        });
+		getPersonData();
+		function getPersonData(){
+
+		$.ajax({
+                    type: "GET",
+                    url: "http://labapi.somee.com/api/Person",
+                    success: function (res) {
+
+                        for (r in res) {
+                           // $("#stdbody").append("<tr><td>" + res[r].Name + "</td><td>" + res[r].regno + "</td><td>" + res[r].cgpa + "</td></tr>");
+						    $("#stdbody").append("<tr><td>" + res[r].ID + "</td><td>" + res[r].Name + "</td><td>" + res[r].Age + "</td><td>" + res[r].Height + "</td><td>" + res[r].CNIC + "</td><td><button type='button' class='btn btn-info' data-toggle='modal' data-target='#exampleModal' onclick=editPerson('" + res[r].ID + "')>Edit</button> | <button type='button' class='btn btn-danger' onclick=deletePerson('" + res[r].ID + "')>Delete</button></td></tr>")
+
+                        }
+                    },
+                    failure: function (res) {
+                        alert("Failure");
+                    },
+                    error: function (res) {
+                        alert("Error");
+                    }
+                });
+		}
+
+
+
+
+		 function editPerson(id) {
+            var editUrl = "http://labapi.somee.com/api/Person/" + id;
+            $.ajax({
+                    type: "GET",
+                    url: editUrl,
+                    success: function (res) {
+                        $("#eid").val(res.ID);
+                        $("#ename").val(res.Name);
+                        $("#eage").val(res.Age);
+                        $("#eheight").val(res.Height);
+                        $("#ecnic").val(res.CNIC);
+                    },
+                    failure: function (res) {
+                        alert("Failed");
+                    },
+                    error: function (res) {
+                        alert("Error");
+                    }
+                });
+        }
+		 function deletePerson(id) {
+            var delUrl = "http://labapi.somee.com/api/Person/" + id;
+            $.ajax({
+                    type: "DELETE",
+                    url: delUrl,
+                    success: function (res) {
+                        getPersonData();
+                    },
+                    failure: function (res) {
+                        alert("Failed");
+                    },
+                    error: function (res) {
+                        alert("Error");
+                    }
+                });
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html> 

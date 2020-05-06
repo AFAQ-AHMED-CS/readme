@@ -1,0 +1,34 @@
+body {
+	margin-top: 0px;
+	
+}
+
+.M {
+	margin-top: 10px;
+}
+
+.B {
+	margin-bottom: 10px;
+}
+
+.F-c {
+	text-align: center;
+}
+
+div.container h2,
+h1 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.b {
+	margin-bottom: 20px;
+	border: 1px solid #ced4da;
+	background-color: #FFFAFA;
+  padding: 10px;
+  box-shadow: 5px 10px 8px 10px #888888;
+}
+
+form.F-c lable{
+	font-weight: 400;
+}
